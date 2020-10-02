@@ -1,7 +1,7 @@
 <template>
   <div class="posts">
     <div v-for="post in posts" :key="post.id">
-      <Post :post="post" />
+      <Post :post="post" @post-liked="markLiked" />
       <br />
     </div>
   </div>
@@ -26,6 +26,11 @@ export default {
     axios.get('https://jsonplaceholder.typicode.com/posts')
       .then(res => this.posts = res.data.map(post => {return {...post, "liked": false}}))
       .catch(err => console.log(err));
+  },
+  methods: {
+    markLiked(e) {
+      e.liked = !e.liked;
+    }
   }
 }
 </script>

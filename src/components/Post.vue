@@ -1,5 +1,5 @@
 <template>
-  <div class="post" :class="{'is-liked': post.liked}" @dblclick="markLiked">
+  <div class="post" :class="{'is-liked': post.liked}" @dblclick="$emit('post-liked', post)">
     <p>User {{post.userId}}</p>
     <p>{{post.title}}</p>
     <p>{{post.body}}</p>
@@ -11,12 +11,7 @@ export default {
   name: 'Post',
   props: [
     'post'
-  ],
-  methods: {
-    markLiked() {
-      this.post.liked = !this.post.liked;
-    }
-  }
+  ]
 }
 </script>
 
