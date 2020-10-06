@@ -12,6 +12,7 @@
 
 <script>
 import uuid from 'uuid';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'AddPost',
@@ -24,6 +25,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['addNewPost']),
     addPost(e) {
       e.preventDefault();
       const newPost = {
@@ -33,7 +35,7 @@ export default {
         body: this.newPost.body,
         liked: false
       }
-      this.$emit('add-post', newPost);
+      this.addNewPost(newPost);
       this.newPost = {
         title: '',
         body: ''
