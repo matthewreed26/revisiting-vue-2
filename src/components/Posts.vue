@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <div v-for="post in posts" :key="post.id">
+    <div v-for="post in allPosts" :key="post.id">
       <Post :post="post" @post-liked="markLiked" />
       <br />
     </div>
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Post from './Post.vue';
 
 export default {
@@ -18,10 +19,15 @@ export default {
   props: [
     'posts'
   ],
+  computed: mapGetters(['allPosts']),
   methods: {
+    ...mapActions(['fetchPosts']),
     markLiked(e) {
       e.liked = !e.liked;
     }
+  },
+  created() {
+    this.fetchPosts();
   }
 }
 </script>
